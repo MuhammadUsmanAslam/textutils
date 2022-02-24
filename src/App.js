@@ -1,52 +1,23 @@
-import logo from "./logo.svg";
 import "./App.css";
+import Home from "./components/Home";
+import About from "./components/About";
+import Navbar from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
+	const [darkMode, setDarkMode] = useState(false);
 	return (
-		<div className="app">
-			<nav className="navbar navbar-expand-lg navbar-light bg-light">
-				<div className="container-fluid">
-					<a className="navbar-brand" href="/">
-						TextUtils
-					</a>
-					<button
-						className="navbar-toggler"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent"
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
-						<span className="navbar-toggler-icon"></span>
-					</button>
-					<div className="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-							<li className="nav-item">
-								<a className="nav-link active" aria-current="page" href="/">
-									Home
-								</a>
-							</li>
-							<li className="nav-item">
-								<a className="nav-link" href="/">
-									About
-								</a>
-							</li>
-						</ul>
-						<form className="d-flex">
-							<input
-								className="form-control me-2"
-								type="search"
-								placeholder="Search"
-								aria-label="Search"
-							/>
-							<button className="btn btn-outline-success" type="submit">
-								Search
-							</button>
-						</form>
-					</div>
-				</div>
-			</nav>
+		<div className={`app bg-${darkMode ? "dark" : "light"}`}>
+			<Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+			<Routes>
+				<Route
+					exact
+					path="/"
+					element={<Home darkMode={darkMode} setDarkMode={setDarkMode} />}
+				/>
+				<Route exact path="/about" element={<About darkMode={darkMode} />} />
+			</Routes>
 		</div>
 	);
 }
